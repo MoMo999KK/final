@@ -17,8 +17,7 @@ import { UserCourse } from "@prisma/client"
 import SearchContainer from "@/components/SearchContainer"
 import { db } from "@/lib/prismaDB"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { ForgetPasswordEmailCOmponent } from "@/components/forgetPasswordEmailform"
-import Link from "next/link"
+ import Link from "next/link"
 import { CoursList } from "@/components/homePage/Course-list"
 import { getCurrentUser } from "./actions/get-current-user"
    
