@@ -14,7 +14,7 @@ export const ContactForm = () => {
    
     const sendEmail = (e:any) => {
       e.preventDefault();
-  
+        //@ts-ignore
      
             emailjs.sendForm('service_pmwrbfv', '123456', formRef.current, 'oJW3PHIZDmli_4gTk')
         
@@ -31,6 +31,7 @@ export const ContactForm = () => {
     };
  
 
+    {/*@ts-ignore*/}
   return (
     <div >
     <form
