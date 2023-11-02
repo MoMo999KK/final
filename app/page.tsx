@@ -59,7 +59,7 @@ const Home = async() => {
      
  
         <div className="max-w-[1300px] h-screen flex flex-col   mx-auto ">
-          <div className="">  <Navbar/></div>
+          <div className="">  <Navbar user={curentUser}/></div>
         
 
 

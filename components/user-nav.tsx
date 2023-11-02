@@ -6,11 +6,16 @@ import { signOut, useSession } from "next-auth/react"
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
   import { Button } from "./ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from "./ui/dropdown-menu"
-import { LogOut, User } from "lucide-react"
+import { LogOut, User as Karbar } from "lucide-react"
 import Link from "next/link"
+import { User } from "@prisma/client"
+
+ interface UserPorps{
+  user:User | null
+}
  
   
-  export function UserNav() {
+  export function UserNav({user}:UserPorps) {
     const {data:session}=useSession()
     return (
       <DropdownMenu>
@@ -33,10 +38,10 @@ import Link from "next/link"
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <Link href={`/users/${session?.user?.id}`}>
+            <Link href={`/users/${user?.id}`}>
             <DropdownMenuItem >
               Profile
-              <DropdownMenuShortcut><User /></DropdownMenuShortcut>
+              <DropdownMenuShortcut><Karbar /></DropdownMenuShortcut>
             </DropdownMenuItem>
             </Link>
             

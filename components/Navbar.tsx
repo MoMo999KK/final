@@ -2,8 +2,11 @@
  import MobileNavbar from './MobileNavbar'
 import DesktopNavbar from './DesktopNavbar'
 import { usePathname } from 'next/navigation'
-
-const Navbar = () => {
+import { User } from '@prisma/client'
+interface Props{
+  user:User | null
+}
+const Navbar = ({user}:Props) => {
   const pathName=usePathname()
      
      
@@ -15,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className="md:hidden">
 
-        <MobileNavbar/>
+        <MobileNavbar user={user}/>
         </div>
 
         

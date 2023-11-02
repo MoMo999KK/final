@@ -7,9 +7,12 @@ import { Button } from './ui/button'
 import useLoginModalNow from '@/app/stores/useLogInModal'
 import useRegisterModal from '@/app/stores/useRegisterModal'
 import { usePathname } from 'next/navigation'
+import { User } from '@prisma/client'
  
-
-const MobileNavbar = () => {
+interface Props{
+  user:User |  null
+}
+const MobileNavbar = ({user}:Props) => {
   const searchContainer=useSearchContainer()
 
   const {data}=useSession()
@@ -22,7 +25,7 @@ const MobileNavbar = () => {
           {data?.user?(
 
 
-        <UserNav/>
+        <UserNav user={user}/>
         ):( <div className="flex gap-2"> <Button onClick={()=>loginModal.onOpen()}>Login</Button><Button onClick={()=>registerModal.onOpen()}>Register</Button></div> )}
                    {!pathName.startsWith("/courses") && !pathName.startsWith("/users")  &&(<Search color='white' onClick={()=>searchContainer.onOpen()} />) }
 
