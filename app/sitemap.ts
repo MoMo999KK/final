@@ -6,7 +6,7 @@ export default async function sitemap(){
             isPublished:true
         }
     })
-    const ss=courses.map((course)=>(
+    const singleCourses=courses.map((course)=>(
         
     ))
 

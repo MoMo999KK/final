@@ -21,11 +21,11 @@ const Chapterdetails = async({params}:{params:{chapterId:string}}) => {
   
   return (
     <>
-    <div className='flex flex-col w-5/6 bg-slate-500  justify-between h-auto mx-auto px-5'>
+    <div className='flex flex-col w-5/6 bg-slate-500  justify-between h-full mx-auto px-5'>
       <Link className='self-end mt-4 mx-8' href={`/instructor/${teacher.id}`}><MoveLeft size={57} /> </Link>
 <h1 className='font-bold'>{chapter?.name}</h1>
 
-<ChapterEdit initialData={chapter}/>
+<ChapterEdit  initialData={chapter}/>
 
 
 

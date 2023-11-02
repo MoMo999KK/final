@@ -26,7 +26,7 @@ export const ChapterNameList = ({initialData,userId}:Props) => {
   return (
     <div>
       {initialData?.map((chapter:UserCoursePart)=>(
-        <div className="flex flex-col" key={chapter.id}>
+        <div className="flex flex-col h-[70px] gap-2" key={chapter.id}>
           <p>{chapter.name} <Edit onClick={()=>router.push(`/instructor/${userId}/create/chapters/${chapter.id}`)}/></p>
 
           
@@ -34,7 +34,7 @@ export const ChapterNameList = ({initialData,userId}:Props) => {
 
           {/*is editting is true and we actully show a from with name on it*/}
 
-       <video src=""></video>
+      
         </div>
       ))}
     </div>

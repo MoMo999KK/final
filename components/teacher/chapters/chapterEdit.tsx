@@ -28,22 +28,24 @@ interface Props{
     initialData:UserCoursePart | null
 }
 const formSchema = z.object({
-  videoDuration:z.string().optional() ,
-  name: z.string().min(1),
-    videoUrl: z.string().min(1),
+
+    name: z.string().optional(),
+ 
+    videoUrl: z.string().optional(),
+    name1: z.string().optional(),
     name2: z.string().optional(),
     videoUrl2: z.string().optional(),
     name3: z.string().optional(),
-    videoUr3: z.string().optional(),
-    name4: z.string().optional(),
-    videoUr4: z.string().optional(),
+    videoUrl3: z.string().optional(),
+   
+  
      description: z.string().min(3),
      resoursesLink: z.string().optional()
 
 
    
   });
-  type ChapterFormValues = z.infer<typeof formSchema>
+ 
   
  
 
@@ -54,53 +56,51 @@ export const ChapterEdit = ({initialData}:Props) => {
     const router=useRouter()
     const {toast}=useToast()
 
-    const form = useForm<ChapterFormValues>({
+    
+      const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-      
-        defaultValues:  {
-          name: '',
-          name2: '',
-          name3: '',
-          name4: '',
-          videoDuration: '',
-          videoUrl: '',
-          videoUrl2: '',
+        defaultValues: {
+          name:initialData?.name || '',
+          name1:initialData?.name1 || '',
+          name2:initialData?.name2 || '',
+          name3:initialData?.name3 || '',
         
-          videoUrl4: '',
-          description: '',
-          resoursesLink: ''
-        } 
-      });
-      const loading=form.formState.isSubmitted
-
-
-
-
-
-      const onSubmit = async (values: ChapterFormValues) => {
-        try {
+          videoUrl:initialData?.videoUrl || '',
+          videoUrl2:initialData?.videoUrl2 || '',
+          videoUrl3:initialData?.videoUrl3 || '',
+        
            
-        
-            await axios.patch(`/api/registerCourse/${courseId}/${chapterId}`, values);
-            toast({
-              title:"change committed succesfully"
-            })
-        
-        
-        
-        } catch (error: any) {
-          toast({
-            title:"failed to  committ the change",description:"please trx again later"
+          description: initialData?.description || '',
+          resoursesLink:initialData?.resoursesLink || ''
+        },
+      });
+    
+    
+
+
+
+ 
+      const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+          await axios.patch(`/api/registerCourse/${courseId}/${chapterId}`, values);
+           toast({
+            title:"change committed succesfully"
           })
-         } finally {
-         }
-      };
+          router.refresh();
+         
+        } catch {
+          toast({
+            title:"Error comitting failed"
+          })
+        }
+      }
     
  
       const onDelete = async () => {
         try {
           
           await axios.delete(`/api/registerCourse/${courseId}/${chapterId}`);
+          toast({title:"chapter Deleted succesfully"})
           router.refresh();
           router.back()
 
@@ -114,50 +114,97 @@ export const ChapterEdit = ({initialData}:Props) => {
 
     
   return (
-    <div>
+    <div className="mr-2 h-full">
 
          <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-    
-          <div className="md:grid md:grid-cols-3 gap-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-3/6 h-full mx-5">
+
+
+
+       
+        <div className="md:grid  gap-8">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name </FormLabel>
+                  <FormLabel>Main Title for the Entire Chapter </FormLabel>
                   <FormControl>
-                    <Input   placeholder="Product name" {...field} />
+                    <Input   placeholder="Chapter Title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+              />
+    
+              </div>
+         
+          <div className="md:grid  gap-8">
+            <FormField
+              control={form.control}
+              name="name1"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Firs Title for the First Video </FormLabel>
+                  <FormControl>
+                    <Input   placeholder="Firs Video's Title" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-         
-          
-          
-                  
-          </div>
-          <div className="md:grid md:grid-cols-3 gap-8">
+              <div className="md:grid  gap-8">
             <FormField
               control={form.control}
               name="name2"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Second Title for the second video </FormLabel>
+                  <FormLabel>Second Title for the Second Video </FormLabel>
                   <FormControl>
-                    <Input   placeholder="Product name" {...field} />
+                    <Input   placeholder="Second Video's Title" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+                 <FormField
+              control={form.control}
+              name="name3"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Third Title for the second video(optional) </FormLabel>
+                  <FormControl>
+                    <Input   placeholder="title for the  third video" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+                 <FormField
+              control={form.control}
+              name="videoUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>First video </FormLabel>
+                  <FormControl>
+                    <ImageUpload 
+                      value={field.value ? [field.value] : []} 
+                       onChange={(url) => field.onChange(url)}
+                      onRemove={() => field.onChange('')}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+               </div>
+         
               <FormField
               control={form.control}
               name="videoUrl3"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Second video(optional)</FormLabel>
+                  <FormLabel>third video(optional)</FormLabel>
                   <FormControl>
                     <ImageUpload 
                       value={field.value ? [field.value] : []} 
@@ -174,12 +221,13 @@ export const ChapterEdit = ({initialData}:Props) => {
           
                   
           </div>
-          <FormField
+          
+              <FormField
               control={form.control}
-              name="videoUrl"
+              name="videoUrl2"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Background image</FormLabel>
+                  <FormLabel>Vieo Two (optional)</FormLabel>
                   <FormControl>
                     <ImageUpload 
                       value={field.value ? [field.value] : []} 
@@ -191,26 +239,12 @@ export const ChapterEdit = ({initialData}:Props) => {
                 </FormItem>
               )}
             />
-          <div className="md:grid md:grid-cols-3 gap-8">
-            <FormField
-              control={form.control}
-              name="videoDuration"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>VideoDuration</FormLabel>
-                  <FormControl>
-                    <Input   placeholder="Product name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+         
             
          
           
           
-                  
-          </div>
+          
           <div className="md:grid md:grid-cols-3 gap-8">
             <FormField
               control={form.control}
@@ -251,7 +285,7 @@ export const ChapterEdit = ({initialData}:Props) => {
           </div>
         
         
-          <Button   className="ml-auto" type="submit" disabled={form.formState.isSubmitting}>
+          <Button   className="ml-auto" type="submit" >
       Create/Edit
           </Button>
         </form>
@@ -263,6 +297,7 @@ export const ChapterEdit = ({initialData}:Props) => {
 <p>delete this chapter <Trash2 onClick={()=>onDelete()}/></p></div>
 
     </div>
+    
   )
 }
 

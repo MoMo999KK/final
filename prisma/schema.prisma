@@ -122,18 +122,18 @@ model UserCoursePart {
   id              String @id @default(auto()) @map("_id") @db.ObjectId
   
   name             String  
+  name1            String?  
   
-  resoursesLink      String?
   videoUrl           String?  
+  resoursesLink      String?
 
-  videoUrl2          String? 
   name2          String? 
+  videoUrl2          String? 
   
          
-  videoUrl3          String?  
   name3          String?  
-  videoUrlFour4         String?  
-  name4         String?  
+  videoUrl3          String?  
+  
   videoDuration        String?  
   description           String?
  
@@ -227,7 +227,8 @@ model Purchuses{
        userId         String? @db.ObjectId
          user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
               userCourseId      String? @db.ObjectId
-         userCourse UserCourse? @relation(fields: [userId], references: [id], onDelete: Cascade)
+         userCourse UserCourse? @relation(fields: [userCourseId], references: [id], onDelete: Cascade)
+         teacherId    String?
 
 
     

@@ -54,12 +54,7 @@ export async function POST(
 
      }
     })
-
-  if(!addedCourse || purchuse){
-    return NextResponse.json("failed to add the course  ",{status:400})
-
-  }
-
+ 
   
 
     return NextResponse.json({addedCourse,purchuse},{status:200});

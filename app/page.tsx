@@ -53,7 +53,7 @@ const Home = async() => {
    
   
        
-    <div className="w-full bg-gradient-to-tr from-black to-slate-800 ">
+    <div className="w-full bg-gradient-to-tr from-red-950 to-slate-800 ">
  
     
 

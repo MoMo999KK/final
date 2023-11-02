@@ -5,8 +5,10 @@ import Navbar from '@/components/Navbar'
 import { HandelViewIncrement } from '@/components/course/handel-viewIncrement'
 import { DispayFreeParts } from '@/components/courseDetails/DisplayFreeParts'
 import { DispayChapters } from '@/components/courseDetails/Show-parts'
+import { HandelLogin } from '@/components/courseDetails/chck-login'
 import CommentFeed from '@/components/courseDetails/comment-feed'
-import { Commenthandler } from '@/components/courseDetails/comment-handler'
+ import { Commenthandler } from '@/components/courseDetails/comment-handler'
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { db } from '@/lib/prismaDB'
 import { ArrowBigLeft } from 'lucide-react'
@@ -22,12 +24,11 @@ const CourseDetails = async({
   params: { courseId: string }
 }) => {
    
-  if(!params.courseId){
-    return notFound
-  }
+  
   // if ther is no sesion we should open the log in modal
-  const session=await getServerSession(authOptions)
-  const isBuyer=await db.user.findUnique({
+   const session=await getServerSession(authOptions) 
+  console.log(session)
+   const isBuyer=await db.user.findFirst({
     where:{
       email:session?.user?.email!,
       boughtCourses:{
@@ -38,6 +39,8 @@ const CourseDetails = async({
     },
     
   })
+
+ 
    
 
   try {
@@ -82,13 +85,14 @@ const commentsCourse=await db.comments.findMany({
  
 
   return (
-    <div className='max-w-[1270px]  mx-auto h-auto  '>
+    <div className='max-w-[1300px]  mx-auto h-auto  '>
       <Navbar/>
-     <HandelViewIncrement courseId={singleCourse?.id} />
-
-     <div className="grid grid-cols-1 md:grid-cols-2 px-5 pt-12">
+     <HandelViewIncrement courseId={singleCourse?.id}  />
     
-      <div className=" h-[200px] rounded-lg shadow-xl bg-blue-200 w-5/6 mx-auto p-8 flex flex-col items-center">
+
+     <div className="grid grid-cols-1 md:grid-cols-2 px-2 pt-12">
+    
+      <div className=" h-[200px] rounded-lg shadow-xl bg-blue-200 w-3/6 mx-auto p-3 flex flex-col items-center">
         <div className="text-center mt-1"><h1>Teacher:{singleCourse?.user?.name}</h1> </div>
         <div className="text-center mt-1"><h1>number of chapters:{singleCourse?.userCoursePart.length}</h1> </div>
         <div className="text-center mt-1"><h1>description:{singleCourse?.description || "Empty"}</h1> </div>
@@ -98,29 +102,43 @@ const commentsCourse=await db.comments.findMany({
 
          </div>
       <div   >
-        <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-3">
           <div className="">
             <DispayFreeParts initialData={singleCourse}/>
             <Separator/>
           </div>
-          
+        
 
-          <div className="">
+
+          {!session || !isBuyer ? ( <div className="">
+            <HandelLogin initialData={singleCourse}/>
+
+        
+      </div>
+        ):(   
+
+       
+          <div className="w-full">
         
         <DispayChapters canSee={isBuyer} initialData={singleCourse}/>
         </div>
         
 
+        )}
       </div>
+     
+    
       <div className='mt-[100px]' >
         <h1>Disscution Section</h1>
         <Separator/>
+
         <div className="">
           <CommentFeed dataProps={commentsCourse}  isbuyer={isBuyer}/>
         </div>
        
         <Commenthandler  initialData={singleCourse} isbuyer={isBuyer}/>
       </div>
+  
       </div>
    
 

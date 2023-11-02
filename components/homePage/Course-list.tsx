@@ -7,8 +7,7 @@ import { useRouter } from "next/navigation"
 import axios from "axios"
 import { cn } from "@/lib/utils"
 import { Button } from "../ui/button"
-import HandelFreeCourses from "../freeCourses/handel-joinFree"
-import Image from "next/image"
+ import Image from "next/image"
 import useLoginModalNow from "@/app/stores/useLogInModal"
 import { ArrowBigRight, MoveRight } from "lucide-react"
 import { useSession } from "next-auth/react"
@@ -91,13 +90,13 @@ export const CoursList = ({initialData,user}:Props) => {
 
         </div> )
         }
-      <div className="text-gray-900 font-bold text-xl mb-2">{course.name}</div>
-      <p className="text-gray-700 text-base">{course.description}</p>
+      <div className="text-gray-900 font-bold text-xl pt-3">{course.name}</div>
+      <p className="text-gray-700 text-base mt-2">{course.description}</p>
     </div>
     <div className="flex items-center">
      
        <div className="text-sm">
-        <p className="text-gray-900 leading-none">instructor</p>
+        <p className="text-gray-900 leading-none">m</p>
         <p className="text-gray-600 flex cursor-pointer" onClick={()=>router.push(`/courses/${course.id}`)}> see details<MoveRight /></p>
       </div>
     </div>

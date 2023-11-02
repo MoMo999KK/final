@@ -87,12 +87,12 @@ export const CreateCourseForm = ({
 
   return (
   
-       <div className="flex justify-between">
+       <div className="flex  ">
         
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 flex items-center gap-3 mt-4"
+            className="space-y-4  items-center gap-3 mt-4"
           >
              <FormField
               control={form.control}

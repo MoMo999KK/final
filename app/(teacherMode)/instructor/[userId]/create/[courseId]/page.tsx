@@ -12,6 +12,7 @@ import EditImageForm from '@/components/teacher/edit-cover-image'
 import { ChoseCategoryForm } from '@/components/teacher/edit-ctaegory-form'
  import { EditPriceForm } from '@/components/teacher/edit-price'
 import EditVideoForm from '@/components/teacher/edit-video-intro'
+import { Separator } from '@/components/ui/separator'
 import { Category, UserCourse } from '@prisma/client'
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
@@ -31,8 +32,10 @@ const SingleCourseDetails = async({params}:{params:{courseId:string}}) => {
     }
     const allCategories=await getCategories()
    return (
-    <div className='w-full'>
-        <p>Edit Your Course here</p>
+    <div className="w-screen h-full ">
+      <h1 className='text-3xl text-center my-3'>Edit Your Course Here</h1>
+    <div className='w-full h-screen '>
+        
     <div className='w-5/6 shadow-sm bg-slate-500 mx-auto grid grid-cols-1 md:grid-cols-2 '>
       <div className="">
         <EditNameForm initialData={currentCurse} courseId={currentCurse?.id}/>
@@ -55,20 +58,27 @@ const SingleCourseDetails = async({params}:{params:{courseId:string}}) => {
         <ChoseCategoryForm initialData={currentCurse}  categories={allCategories} />
         </div>
     </div>
-     <p>CHapters Related</p>
-     <div className="w-5/6 mx-auto">
+    <div className="w-5/6 bg-slate-600 mx-auto">
+     <h1 className='text-white text-3xl font-extrabold text-center'>Chapters Related</h1>
+     <Separator/>
+     <div className="grid grid-cols-1 md:grid-cols-2 gap-1 justify-between">
+     <div className="w-2/6 h-[300px] shadow-md">
 
-        <div className="h-[300px] ">
+
+       
         <CreateChapterName     courseId={currentCurse?.id} user={teacher}  />
+        
         </div>
-        <div className="">
+        <div className="w-full h-[50px]">
           <ChapterNameList initialData={currentCurse?.userCoursePart} userId={currentCurse?.userId}/>
        
+        </div>
         </div>
      </div>
        
 
        
+    </div>
     </div>
   )
 }

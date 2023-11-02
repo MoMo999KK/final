@@ -7,6 +7,7 @@ import LoginModal from '@/components/modals/LoginModal'
 import { Toaster } from '@/components/ui/toaster'
 import Footer from '@/components/Footer'
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

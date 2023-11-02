@@ -14,7 +14,7 @@ interface ImageUploadProps {
   value: string[];
 }
 
-const ImageUpload: React.FC<ImageUploadProps> = ({
+const VideoUpload: React.FC<ImageUploadProps> = ({
   disabled,
   onChange,
   onRemove,
@@ -44,12 +44,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
                 <Trash className="h-4 w-4" />
               </Button>
             </div>
-            <Image
-              fill
-              className="object-cover"
-              alt="Image"
-              src={url}
-            />
+           <video src={url}/>
           </div>
         ))}
       </div>
@@ -67,7 +62,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
               onClick={onClick}
             >
               <ImagePlus className="h-4 w-4 mr-2" />
-              Upload an Image/Video
+              Upload an Image
             </Button>
           );
         }}
@@ -76,4 +71,4 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   );
 }
  
-export default ImageUpload;
+export default VideoUpload;

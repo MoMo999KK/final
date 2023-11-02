@@ -9,7 +9,7 @@ import {
   } from "@/components/ui/accordion"
   import ReactPlayer from "react-player"
 import { User, UserCourse, UserCoursePart } from "@prisma/client"
-import { Copy } from "lucide-react"
+import { Copy, PlaneIcon } from "lucide-react"
 import { useToast } from "../ui/use-toast"
 import { useCallback } from "react"
 import useLoginModalNow from "@/app/stores/useLogInModal"
@@ -47,7 +47,7 @@ import { Button } from "../ui/button"
           {canSee&&(
 
           <AccordionContent className="flex">
-            <ReactPlayer  controls url={chapter.videoUrl as string}/>
+            <ReactPlayer  controls url={chapter.videoUrl3 as string} />
            {chapter.resoursesLink&&(
 
  <div className="flex" onClick={()=> {navigator.clipboard.writeText(chapter?.resoursesLink as string),toast({title:"copied"})}} ><Copy />  {chapter?.resoursesLink} </div>  )}    </AccordionContent>)}
