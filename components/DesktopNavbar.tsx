@@ -11,8 +11,12 @@ import { Button } from './ui/button'
 import useLoginModalNow from '@/app/stores/useLogInModal'
 import useRegisterModal from '@/app/stores/useRegisterModal'
 import { usePathname } from 'next/navigation'
+import { User } from '@prisma/client'
+interface Props{
+  user:User | null
+}
 
-const DesktopNavbar = () => {
+const DesktopNavbar = ({user}:Props) => {
   const searchContainer=useSearchContainer()
   const loginModal=useLoginModalNow()
   const registerModal=useRegisterModal()
@@ -24,7 +28,7 @@ const DesktopNavbar = () => {
       
      
         <div className="self-center flex items-center gap-x-5">
-          {data?.user?(  <UserNav/>):(  <div className="flex gap-3"><Button onClick={()=>loginModal.onOpen()}>Login</Button><Button variant={"secondary"} onClick={()=>registerModal.onOpen()}>Register</Button></div>  )}
+          {data?.user?(  <UserNav user={user}/>):(  <div className="flex gap-3"><Button onClick={()=>loginModal.onOpen()}>Login</Button><Button variant={"secondary"} onClick={()=>registerModal.onOpen()}>Register</Button></div>  )}
            
            {!pathName.startsWith("/courses") && !pathName.startsWith("/users") && !pathName.startsWith("/about")   &&(<Search onClick={()=>searchContainer.onOpen()} />) }
          

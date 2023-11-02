@@ -14,7 +14,7 @@ const Navbar = ({user}:Props) => {
     <div className=''>
         <div className="hidden md:block">
 
-        <DesktopNavbar/>
+        <DesktopNavbar user={user}/>
         </div>
         <div className="md:hidden">
 
