@@ -1,7 +1,6 @@
 import { getCurrentUser } from '@/app/actions/get-current-user'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import Header from '@/components/Header'
- import { HandelViewIncrement } from '@/components/course/handel-viewIncrement'
+  import { HandelViewIncrement } from '@/components/course/handel-viewIncrement'
 import { DispayFreeParts } from '@/components/courseDetails/DisplayFreeParts'
 import { DispayChapters } from '@/components/courseDetails/Show-parts'
 import { HandelLogin } from '@/components/courseDetails/chck-login'
@@ -12,10 +11,9 @@ import { Separator } from '@/components/ui/separator'
 import { db } from '@/lib/prismaDB'
 import { ArrowBigLeft } from 'lucide-react'
 import { getServerSession } from 'next-auth'
-import Error from 'next/error'
+ 
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
-  
+   
 
 const CourseDetails = async({
   params
@@ -24,9 +22,8 @@ const CourseDetails = async({
 }) => {
    
   
-  // if ther is no sesion we should open the log in modal
-   const session=await getServerSession(authOptions) 
-  console.log(session)
+    const session=await getServerSession(authOptions) 
+ 
    const isBuyer=await db.user.findFirst({
     where:{
       email:session?.user?.email!,

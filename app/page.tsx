@@ -59,8 +59,8 @@ const Home = async() => {
      
  
         <div className="max-w-[1300px] h-screen flex flex-col   mx-auto ">
-        {/* @ts-ignore */}
-          <div className="">  <Navbar user={curentUser}/></div>
+         
+          <div className="">  <Navbar user={curentUser as any}/></div>
         
 
 

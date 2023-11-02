@@ -4,7 +4,7 @@ import DesktopNavbar from './DesktopNavbar'
 import { usePathname } from 'next/navigation'
 import { User } from '@prisma/client'
 interface Props{
-  user:User | null
+  user:User | null 
 }
 const Navbar = ({user}:Props) => {
   const pathName=usePathname()
