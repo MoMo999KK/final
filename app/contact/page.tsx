@@ -1,7 +1,6 @@
-import Navbar from '@/components/Navbar'
- import React from 'react'
-//checking if the user is admin to chage the text or see a comletly diffrent view
-const Contact = () => {
+ 
+ 
+ const Contact = () => {
   return (
     <div>
        
