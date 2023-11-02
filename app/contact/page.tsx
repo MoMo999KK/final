@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar'
 const Contact = () => {
   return (
     <div>
-        <Navbar/>
+       
 
         <div className="w-3/6 mx-auto bg-red-200">Helo</div>
 
