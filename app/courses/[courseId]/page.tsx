@@ -1,8 +1,7 @@
 import { getCurrentUser } from '@/app/actions/get-current-user'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import Header from '@/components/Header'
-import Navbar from '@/components/Navbar'
-import { HandelViewIncrement } from '@/components/course/handel-viewIncrement'
+ import { HandelViewIncrement } from '@/components/course/handel-viewIncrement'
 import { DispayFreeParts } from '@/components/courseDetails/DisplayFreeParts'
 import { DispayChapters } from '@/components/courseDetails/Show-parts'
 import { HandelLogin } from '@/components/courseDetails/chck-login'
@@ -80,13 +79,14 @@ const commentsCourse=await db.comments.findMany({
     
   }
 })
+const currentUser=await getCurrentUser()
     
 
  
 
   return (
     <div className='max-w-[1300px]  mx-auto h-auto  '>
-      <Navbar/>
+     
      <HandelViewIncrement courseId={singleCourse?.id}  />
     
 
