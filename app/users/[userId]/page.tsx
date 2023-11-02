@@ -2,9 +2,9 @@
 
 import { findCurrenAdmin } from '@/app/actions/findCurrentAdmin'
 import { getCurrentUserProfile } from '@/app/actions/get-curenUserProfile'
+import { getCurrentUser } from '@/app/actions/get-current-user'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import Navbar from '@/components/Navbar'
-import { ProfileTabs } from '@/components/profile-user/tabs'
+ import { ProfileTabs } from '@/components/profile-user/tabs'
  import { UserProfileSidebar } from '@/components/profile-user/userProfileSidebar'
 import { db } from '@/lib/prismaDB'
 import { UserCourse } from '@prisma/client'
@@ -36,6 +36,7 @@ const UserProfileHere =async ({
   if(user?.id !==params.userId){
     redirect("/")
   }
+  const Ouruser=await getCurrentUser()
  
  
  
@@ -64,7 +65,7 @@ const UserProfileHere =async ({
   return (
     <div className='w-full h-full overflow-hidden '>
       <div className="h-[80px]">
-        <Navbar/>
+       
         </div>
         {purchused.map((course)=>(
 
