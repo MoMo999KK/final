@@ -121,6 +121,7 @@ const CommentFeed = ({dataProps,isbuyer}:Props) => {
            
               
               <div className="space-y-4">
+              
               {data.reply.map((replayComment:Reply)=>(
               <div className="flex" key={replayComment.id}>
                 <div className="flex-shrink-0 mr-3">
