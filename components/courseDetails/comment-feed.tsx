@@ -108,6 +108,7 @@ const CommentFeed = ({dataProps,isbuyer}:Props) => {
           <Image className="mt-3 rounded-full w-6 h-6 sm:w-8 sm:h-8" height={30} width={30} src="/users/messi.jpg" alt="d"/>
           </div>
           <div className="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+              {/* @ts-ignore */}
             <strong>{data.user.name}</strong> <span className="text-xs text-gray-400">{data.createdAt.toLocaleDateString()} </span>
             <p className="text-sm">
              {data.text}
@@ -115,19 +116,20 @@ const CommentFeed = ({dataProps,isbuyer}:Props) => {
             <button className="flex items-center gap-1" onClick={()=>setShowInput(!showInput)}><MessageSquare  />Reply</button>
             {showInput &&( <HandelReplyComment  commentId={data.id}/>)}
 
-           
+             {/* @ts-ignore */}
          
               <h4 className="my-5 uppercase tracking-wide text-gray-400 font-bold text-xs">{data?.reply.length > 0 && (<div className="">Replies</div> )}</h4>
            
               
               <div className="space-y-4">
-              
+              {/* @ts-ignore */}
               {data.reply.map((replayComment:Reply)=>(
               <div className="flex" key={replayComment.id}>
                 <div className="flex-shrink-0 mr-3">
                 <Image className="mt-3 rounded-full w-6 h-6 sm:w-8 sm:h-8" height={30} width={30} src="/users/messi.jpg" alt="d"/>
                 </div>
                 <div className="flex-1 bg-gray-100 rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+                    {/* @ts-ignore */}
                   <strong>{replayComment?.user.name}</strong> <span className="text-xs text-gray-400">{replayComment.createdAt.toLocaleDateString()}</span>
                   <p className="text-xs sm:text-sm">
                    {replayComment.text}

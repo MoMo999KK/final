@@ -1,6 +1,7 @@
 
 "use client"
 
+{/*
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { useToast } from './ui/use-toast';
@@ -31,7 +32,7 @@ export const ContactForm = () => {
     };
  
 
-    {/*@ts-ignore*/}
+  
   return (
     <div >
     <form
@@ -50,5 +51,7 @@ export const ContactForm = () => {
 </div>
   );
 };
+
+*/}
 
 
