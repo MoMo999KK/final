@@ -23,7 +23,7 @@ import { getCurrentUser } from "./actions/get-current-user"
    
 
 const Home = async() => {
-  try {
+ 
     const courses=await db.userCourse.findMany({
       where:{
         isPublished:true
@@ -123,10 +123,9 @@ const Home = async() => {
       
  
   )
-} catch (error) {
-  throw new Error("failed to load courses server error")
-  
-}
+ 
+   
+
 }
 
 export default Home
