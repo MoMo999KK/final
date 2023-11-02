@@ -64,10 +64,30 @@ const LoginModal= () => {
     setIsLoading(true);
 try {
   
-  signIn("credentials",data)
-router.refresh()
-toast({
+// signIn("credentials",data)
+//router.refresh()
+//toast({
+ // title:"login succesfull"
+//})
+signIn('credentials', {
+  data,
+  redirect: false
+})
+.then((callback) => {
+  if (callback?.error) {
+    toast({
   title:"login succesfull"
+})
+
+ 
+  }
+
+  if (callback?.ok) {
+    router.refresh()
+    toast({
+      title:"login Failed"
+    })
+  }
 })
 
   
