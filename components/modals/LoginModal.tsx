@@ -31,6 +31,8 @@ import { Button } from "../ui/button";
 import { Github } from "lucide-react";
  import { Input } from "../ui/input";
 import useLoginModalNow from "@/app/stores/useLogInModal";
+import { useRouter } from "next/navigation";
+import { useToast } from "../ui/use-toast";
  
 const formSchema = z.object({
  
@@ -43,7 +45,9 @@ type BillboardFormValues = z.infer<typeof formSchema>
 const LoginModal= () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModalNow();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);7
+  const router=useRouter()
+  const {toast}=useToast()
 
  
 
@@ -60,13 +64,24 @@ const LoginModal= () => {
     setIsLoading(true);
 try {
   
-  signIn("credentials",data,)
+  signIn("credentials",data)
+router.refresh()
+toast({
+  title:"login succesfull"
+})
+
+  
    
    
     registerModal.onClose();
     loginModal.onOpen();
   
 } catch (error) {
+  toast({
+    title:"faled to login please try again later"
+  })
+  router.refresh()
+  
 
   
 }

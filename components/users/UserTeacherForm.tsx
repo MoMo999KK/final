@@ -27,20 +27,20 @@ export const UserTacherForm = ({isInstructor,initialData,isAdmin}:Props) => {
           if (isInstructor) {
             await axios.patch(`/api/users/${userId}/unteacher`);
             toast({
-                title:"the user is a teacher now"
+                title:"Failed!",description:"the user is not a  teacher now"
                })
             
           } else {
             await axios.patch(`/api/users/${userId}/teacher`);
            toast({
-            title:"the user is no longer a teacher from now"
+            title:"SUccess!",description:"the user is  a teacher"
            })
           }
     
           router.refresh();
         } catch {
             toast({
-                title:"failed to Edit the user server Error the course!"
+                title:"Failed to Edit the user server Error the course!"
                })
          
         }  
