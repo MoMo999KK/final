@@ -3,8 +3,12 @@
 import { ChevronDown, ChevronUp, Menu, X } from "lucide-react"
 import { UserNav } from "./user-nav"
 import { useState } from "react"
+import { User } from "@prisma/client"
+interface Props{
+    user:User | null
+}
 
-function NavbarAdmin() {
+function NavbarAdmin({user}:Props) {
     const [openDrawer,setOpenDrawer]=useState(false)
     const [showMore,setShowMore]=useState(false)
     const [showMoreCourses,setShowMoreCourses]=useState(false)
@@ -13,7 +17,7 @@ function NavbarAdmin() {
     <>
     <div className=" px-4">
          
-        <UserNav  /> 
+        <UserNav user={user} /> 
        <Menu className="absolute left-8 top-4 md:hidden" onClick={()=>setOpenDrawer(!openDrawer)}/>  
 
     
