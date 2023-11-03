@@ -14,6 +14,28 @@ import Image from 'next/image'
 import { RedirectType, redirect } from 'next/navigation'
 import { NextResponse } from 'next/server'
 import { useEffect, useState } from 'react'
+
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+import { Purchuses, User } from "@prisma/client"
+import { ArrowBigLeft, ArrowBigRight } from "lucide-react"
+import Link from "next/link"
+ 
  
 
 const UserProfileHere =async ({
@@ -61,16 +83,41 @@ const UserProfileHere =async ({
 
   */}
      
+  ///<ProfileTabs key={course.id} initialData={course.userCourse} purchused={purchused.length}  user={user}/>
 
   return (
-    <div className='w-full h-full overflow-hidden '>
-      <div className="h-[80px]">
-       
-        </div>
+    <div className='w-full h-full overflow-hidden mt-12 mb-[600px]'>
+      
+        <Tabs defaultValue="account" className="w-[600px] md:w-[1200px]  mx-auto">
+        <TabsList className="grid w-full grid-cols-2" >
+            <TabsTrigger value="courses">Courses</TabsTrigger>
+            <TabsTrigger value="user">Account Information</TabsTrigger>
+          </TabsList>
         {purchused.map((course)=>(
+        
+          <TabsContent value="courses" key={course?.id}>
+               <TabsContent value="courses">
+        <Card>
+          <CardHeader>
+            <CardTitle>Number Of Courses :<span className="ml-2 bg-slate-500 p-2 rounded-md">{user.boughtCourses.length}</span></CardTitle>
+            
+          </CardHeader>
+          <CardContent className="space-y-2 w-full h-full grid grid-cols-2 md:grid-cols-3 mx-auto">
+            <div className="h-[250px] w-[250px] shadow-md bg-blend-hard-light ">
+                <h1>name:{course?.userCourse?.name}</h1>
+               <Link href={`/courses/${course?.userCourse?.id}`} className="flex "><ArrowBigRight/> Go </Link>
+             
+            </div>
+           
+          </CardContent>
+         
+        </Card>
+      </TabsContent>
+            
+          </TabsContent>
 
-        <ProfileTabs key={course.id} initialData={course.userCourse} purchused={purchused.length}  user={user}/>
-        ))}
+))}
+</Tabs>
     </div>
   )
 }

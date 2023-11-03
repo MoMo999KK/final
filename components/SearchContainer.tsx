@@ -13,8 +13,7 @@ import { useRouter } from "next/navigation"
 const SearchContainer = () => {
   const [input,setInput]=useState<string>("")
   const [getResult,setResult]=useState<UserCourse[] | null >([])
-
-    const searchContainer=useSearchContainer()
+ 
     const router=useRouter()
    
     useEffect(()=>{
@@ -27,19 +26,13 @@ const SearchContainer = () => {
 
     },[input])
   return (
-    <div className="overflow-y-hidden h-full w-screen">
-          {searchContainer.isOpen &&(
-    <div className='absolute h-screen w-screen fade-in-0 z-40 top-0 left-0 opacity-9 bg-blue-400 flex flex-col overflow-y-hidden'>
+    <div className="  h-full w-[500px] relative">
+          
+    <div className='absolute h-[250px] w-[500px] fade-in-0 z-40 md:top-[65%] top-[15%] md:left-[157%] left-[30%] opacity-9  flex flex-col '>
 
-      <div className="w-4/6 mx-auto flex justify-center items-center border-sky-100 flex-col" > 
-      <X size={30} onClick={()=>searchContainer.onClose()} className="absolute right-5 top-4"/>
-    
-      
-
-    
-   </div>
-   <Command className={!input.length ? "relative rounded-lg max-w-lg z-50  mx-auto w-[400px] mt-3 md:w-[1000px] h-[45px]"  :"relative rounded-lg max-w-lg z-50 overflow-visible mx-auto w-[400px]  md:w-[1000px] h-[300px]"}>
-    <CommandInput className="w-[400px]   md:w-[1000px]" value={input} onValueChange={(text)=>{
+ 
+   <Command className={!input.length ? "relative rounded-lg max-w-lg z-50  mx-auto w-[400px] mt-3 md:w-[1000px] h-[45px] bg-slate-400"  :"relative rounded-lg max-w-lg z-50  mx-auto w-[400px]  md:w-[1000px] h-[300px]"}>
+    <CommandInput className="w-[400px]   md:w-[1000px] " value={input} onValueChange={(text)=>{
       setInput(text)
     }} placeholder="search for courses"/>
     {input.length>0 ?(
@@ -66,7 +59,9 @@ const SearchContainer = () => {
 
 
 
-)}
+ 
+ 
+    
     </div>
   )
 }

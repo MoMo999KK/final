@@ -1,7 +1,7 @@
 "use client"
 
 import { ChevronDown, ChevronUp, Menu, X } from "lucide-react"
-import { UserNav } from "./user-nav"
+ 
 import { useState } from "react"
 import { User } from "@prisma/client"
 interface Props{
@@ -16,8 +16,7 @@ function NavbarAdmin({user}:Props) {
   return (
     <>
     <div className=" px-4">
-         
-        <UserNav user={user} /> 
+        
        <Menu className="absolute left-8 top-4 md:hidden" onClick={()=>setOpenDrawer(!openDrawer)}/>  
 
     

@@ -1,12 +1,12 @@
-import { Test } from '@/components/test'
+import { getServerSession } from 'next-auth'
 import React from 'react'
+import { authOptions } from '../api/auth/[...nextauth]/route'
 
-const TeastPage = () => {
+const page =async () => {
+    const session=await getServerSession(authOptions)
   return (
-    <div>
-      <Test/>
-    </div>
+    <div>page</div>
   )
 }
 
-export default TeastPage
+export default page

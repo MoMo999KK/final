@@ -3,9 +3,7 @@
 import { MessageNotification } from "@prisma/client"
 import axios from "axios"
 import { useEffect, useRef, useState } from "react"
-//@ts-ignore
-import { Splide, SplideSlide,SplideTrack } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css';
+ 
 import { ArrowLeft, ArrowLeftCircle, ArrowRightCircle } from "lucide-react";
  
  
@@ -37,7 +35,7 @@ export const Slider = () => {
    
  
   return    (
-    <div className="flex relative w-full justify-center items-center h-[40px] bg-blue-200 ">
+    <div className="flex relative w-full justify-center items-center h-[40px] bg-[#dedede] z-40 ">
        
       {messages.map((item, idx) => {
         return (
@@ -46,13 +44,13 @@ export const Slider = () => {
         );
       })}
       
-      <span className="indicators">
+      <span className="indicators leading-8">
         {messages.map((_, idx) => {
           return (
             <button
               key={idx}
               className={
-                slide === idx ? "indicator" : "indicator indicator-inactive"
+                slide === idx ? "indicator uppercase" : "indicator indicator-inactive"
               }
               onClick={() => setSlide(idx)}
             ></button>

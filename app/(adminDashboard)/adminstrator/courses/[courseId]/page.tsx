@@ -3,6 +3,8 @@ import { PriceChangeForm } from '@/components/course/PriceChange'
 import { CoursePublishForm } from '@/components/course/course-publish'
 import { Separator } from '@/components/ui/separator'
 import { db } from '@/lib/prismaDB'
+import { MoveLeft } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const CourseDetailsAdmin =async ({params}:{params:{courseId:string}}) => {
@@ -28,8 +30,10 @@ const CourseDetailsAdmin =async ({params}:{params:{courseId:string}}) => {
     })
   return (
     <>
+    <div className="w-full mt-12 mb-[700px]">
+    <Link href={"/adminstrator"}> <MoveLeft size={50} /> </Link>
     <h1 className='text-center'>iChange Price and publish/unpublish oBS:dont forget to set the price to 0 if its Free</h1>
-    <div className='w-4/6 grid grid-cols-1 md:grid-cols-2  mx-auto'>
+    <div className='w-4/6 grid grid-cols-1 md:grid-cols-2  mx-auto mt-7'>
         <div className="bg-slate-100 shadow-md text-center rounded-md w-[350px]">
             <h1 className='font-bold'>Name: <span className='bg-slate-400'>{course?.name}</span> </h1>
             <h1 className='font-bold'>Creator:<span className='bg-slate-400'>{course?.user?.name}</span> </h1>
@@ -61,6 +65,8 @@ const CourseDetailsAdmin =async ({params}:{params:{courseId:string}}) => {
             <h1 className='font-bold'> <span className='bg-slate-400'>{course?.comments.map((comment)=>(
                 <div className="flex flex-col" key={comment.id}>
                  <p> {comment.text} </p> <span>by:{comment?.user?.name}</span> 
+                 <p> {comment.text} </p> <span>by:{comment?.user?.name}</span>
+                 <p>status:{course.isPublished? "is published" :"not published yet"}</p>
 
                 </div>
             ))}</span> </h1>
@@ -71,6 +77,7 @@ const CourseDetailsAdmin =async ({params}:{params:{courseId:string}}) => {
         </div>
         
 
+    </div>
     </div>
     </>
   )

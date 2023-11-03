@@ -21,8 +21,8 @@ const UserProfileAdmin=async ({params}:{params:{userId:string}}) => {
 
    return (
 
-    <div className='w-full'>
-      <h1>set as admin/teacher/  block unblock/open a course for it/change password </h1>
+    <div className='w-full mt-10 mx-auto ml-3'>
+      <h1 className='text-center text-lg font-semibold mb-3'>set as admin/teacher/  block unblock/open a course for it/change password </h1>
       <div className="grid grid-cols-2 md:grid-cols-4 mx-5 gap-x-4">
          <div className="">
           <h1>complete info</h1>

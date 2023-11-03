@@ -31,8 +31,8 @@ import { Button } from "../ui/button";
 import { Github } from "lucide-react";
  import { Input } from "../ui/input";
 import useLoginModalNow from "@/app/stores/useLogInModal";
-import { useRouter } from "next/navigation";
-import { useToast } from "../ui/use-toast";
+import { redirect } from "next/dist/server/api-utils";
+import { RedirectType, useRouter } from "next/navigation";
  
 const formSchema = z.object({
  
@@ -45,9 +45,8 @@ type BillboardFormValues = z.infer<typeof formSchema>
 const LoginModal= () => {
   const registerModal = useRegisterModal();
   const loginModal = useLoginModalNow();
-  const [isLoading, setIsLoading] = useState(false);7
+  const [isLoading, setIsLoading] = useState(false);
   const router=useRouter()
-  const {toast}=useToast()
 
  
 
@@ -64,44 +63,14 @@ const LoginModal= () => {
     setIsLoading(true);
 try {
   
-// signIn("credentials",data)
-//router.refresh()
-//toast({
- // title:"login succesfull"
-//})
-signIn('credentials', {
-  data,
-  redirect: false
-})
-.then((callback) => {
-  if (callback?.error) {
-    toast({
-  title:"login succesfull"
-})
-
- 
-  }
-
-  if (callback?.ok) {
-    router.refresh()
-    toast({
-      title:"login Failed"
-    })
-  }
-})
-
-  
+  signIn("credentials",data)
    
    
-    registerModal.onClose();
-    loginModal.onOpen();
+    
+    loginModal.onClose();
   
 } catch (error) {
-  toast({
-    title:"faled to login please try again later"
-  })
-  router.refresh()
-  
+router.push("/")
 
   
 }
@@ -109,8 +78,8 @@ signIn('credentials', {
   }
 
   const onToggle = useCallback(() => {
-    registerModal.onClose();
-    loginModal.onOpen();
+    registerModal.onOpen();
+    loginModal.onClose();
   }, [registerModal, loginModal])
   
   const handelLogin=()=>{
@@ -141,7 +110,7 @@ signIn('credentials', {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input disabled={isLoading} placeholder="email" {...field} />
+                    <Input disabled={isLoading} type="email" placeholder="email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -156,7 +125,7 @@ signIn('credentials', {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input disabled={isLoading} placeholder="password" {...field} />
+                    <Input disabled={isLoading} type="password" placeholder="password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

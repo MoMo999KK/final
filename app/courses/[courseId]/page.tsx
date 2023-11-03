@@ -82,7 +82,7 @@ const currentUser=await getCurrentUser()
  
 
   return (
-    <div className='max-w-[1300px]  mx-auto h-auto  '>
+    <div className='max-w-[1300px]  mx-auto h-auto '>
      
      <HandelViewIncrement courseId={singleCourse?.id}  />
     

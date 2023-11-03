@@ -54,7 +54,7 @@ export const authOptions: AuthOptions = {
     })
   ],
   pages: {
-    signIn: '/login',
+    signIn: '/',
   },
   callbacks: {
     session: ({ session, token }) => {
@@ -73,10 +73,12 @@ export const authOptions: AuthOptions = {
         }
       }
     },
-    jwt: ({ token, user }) => {
+    jwt: ({ token, user,session }) => {
        if (user) {
         
         const u = user as unknown as any
+
+       
         return {
           ...token,
           id: u.id,
@@ -88,6 +90,9 @@ export const authOptions: AuthOptions = {
         }
       }
       return token
+      if(!user){
+        throw new Error("failed to login wrong credentials")
+      }
     }
   },
   debug: process.env.NODE_ENV === 'development',

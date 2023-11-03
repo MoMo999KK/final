@@ -1,5 +1,10 @@
 import { Separator } from "@/components/ui/separator"
+import { UserTable } from "@/components/users/users-table"
 import { db } from "@/lib/prismaDB"
+import {  columns } from '@/components/users/users-column'
+import { getUsers } from "@/app/actions/get-allUsers"
+import Link from "next/link"
+import { MoveLeft } from "lucide-react"
 
  
 const AdminUses = async() => {
@@ -14,9 +19,10 @@ const AdminUses = async() => {
       isInstructor:true
     }
   })
+  const users=await getUsers()
  
   return (
-    <div className='w-3/5 mx-auto grid grid-cols-1 md:grid-cols-2'>
+    <div className='w-5/6 mx-auto grid grid-cols-1 md:grid-cols-2 mt-[70px] mb-[1000px]'>
       <div className="">
         <h1>Admins</h1>
         <Separator/>
@@ -33,6 +39,10 @@ const AdminUses = async() => {
         ))}
 
       </div>
+      <div className='w-5/6'>
+      <Link href={"/adminstrator"}> <MoveLeft size={50} /> </Link>
+      <UserTable columns={columns} data={users} />
+    </div>
       
 
     </div>

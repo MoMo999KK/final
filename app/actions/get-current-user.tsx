@@ -11,13 +11,8 @@ export const getCurrentUser=async()=>{
     const user=await db.user.findUnique({
         where:{
 email:session.user?.email!,
-canComment:true       },
-select:{
-    boughtCourses:true,
-    id:true,
-    canComment:true,
-    
-}
+       },
+ 
 
 
 
