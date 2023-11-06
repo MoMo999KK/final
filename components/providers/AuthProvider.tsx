@@ -4,12 +4,12 @@ import {SessionProvider} from "next-auth/react"
 
 interface Children{
     children:React.ReactNode;
-    session?:Session | null
+   
 }
 
-export const AuthProvider = ({children,session}:Children) => {
+export const AuthProvider = ({children}:Children) => {
   return (
-    <SessionProvider session={session} basePath="/">{children}</SessionProvider>
+    <SessionProvider  basePath="/">{children}</SessionProvider>
   )
 }
 
