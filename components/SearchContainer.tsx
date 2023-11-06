@@ -2,7 +2,7 @@
 
 import { Search, X } from "lucide-react"
 import { Input } from "./ui/input"
-import useSearchContainer from "@/app/stores/use-SeatchContianer"
+import useSearchContainer from "@/app/stores/use-chattModal"
 import { useEffect, useState } from "react"
 import { UserCourse } from "@prisma/client"
 import axios from "axios"
@@ -26,9 +26,9 @@ const SearchContainer = () => {
 
     },[input])
   return (
-    <div className="  h-full w-[500px] relative">
+    <div className="h-full mx-auto">
           
-    <div className='absolute h-[250px] w-[500px] fade-in-0 z-40 md:top-[65%] top-[15%] md:left-[157%] left-[30%] opacity-9  flex flex-col '>
+    <div className=' h-[250px] w-3/6 z-40 text-center    mx-auto  flex flex-col '>
 
  
    <Command className={!input.length ? "relative rounded-lg max-w-lg z-50  mx-auto w-[400px] mt-3 md:w-[1000px] h-[45px] bg-slate-400"  :"relative rounded-lg max-w-lg z-50  mx-auto w-[400px]  md:w-[1000px] h-[300px]"}>

@@ -1,6 +1,6 @@
  
  
- import useSearchContainer from "./stores/use-SeatchContianer"
+ import useSearchContainer from "./stores/use-chattModal"
 import { Currency, Search, X } from "lucide-react"
 import { CreateCourseForm } from "@/components/teacher/create-title"
 import { Input } from "@/components/ui/input"
@@ -66,7 +66,7 @@ const Home = async() => {
 
 
         <HeroSection/>
-<div className="mt-3 bg-black ">
+<div className="mt-7 mx-auto ">
   <SearchContainer/>
   
 </div>

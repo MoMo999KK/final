@@ -36,6 +36,7 @@ export async function PATCH(
        isAdmin : true,
       }
     });
+    
 
     return NextResponse.json(edittedUser,{status:200});
   } catch (error) {

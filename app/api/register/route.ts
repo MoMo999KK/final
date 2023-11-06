@@ -31,13 +31,14 @@ export async function POST(
  
 
 
-
+   const randomId=Math.round(Math.random()*100000000)
 
   const user = await db.user.create({
     data: {
       email,
       name,
-      hashedPassword
+      hashedPassword,
+      roomId:randomId
     }
   });
 

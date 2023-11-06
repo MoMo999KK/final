@@ -26,9 +26,10 @@ const ManageCourses = async() => {
      <h5> total users:{users}</h5>
      <h5> total purchuses:{purchuses}</h5>
      <hr />
-     <div className="">
+     <div className="flex flex-col">
     <Link href={"/adminstrator/courses"}><p>See Courses  </p></Link>
     <Link href={"/adminstrator/users"}>See users</Link>
+    <Link href={"/adminstrator/messages"}>See Messages</Link>
     </div>
      
       
