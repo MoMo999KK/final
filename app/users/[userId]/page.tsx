@@ -93,7 +93,7 @@ const UserProfileHere =async ({
             <TabsTrigger value="courses">Courses</TabsTrigger>
             <TabsTrigger value="user">Account Information</TabsTrigger>
           </TabsList>
-        {purchused.map((course)=>(
+        {purchused.length > 0 ?     purchused.map((course)=>(
         
           <TabsContent value="courses" key={course?.id}>
                <TabsContent value="courses">
@@ -116,7 +116,7 @@ const UserProfileHere =async ({
             
           </TabsContent>
 
-))}
+)):"nothing yet"}
 </Tabs>
     </div>
   )
