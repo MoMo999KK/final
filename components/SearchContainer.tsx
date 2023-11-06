@@ -26,7 +26,7 @@ const SearchContainer = () => {
 
     },[input])
   return (
-    <div className="h-full mx-auto">
+    <div className="h-full mx-auto z-10">
           
     <div className=' h-[250px] w-3/6 z-40 text-center    mx-auto  flex flex-col '>
 

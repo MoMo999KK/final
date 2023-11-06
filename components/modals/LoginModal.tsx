@@ -94,10 +94,10 @@ router.push("/")
   }
 
   const bodyContent = (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 z-999">
       <Heading
         title="Welcome to E learning"
-        subtitle="Create an account!"
+        subtitle="Please login to Your account!"
       />
          <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
