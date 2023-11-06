@@ -1,45 +1,40 @@
 import bcrypt from "bcrypt"
 import NextAuth, { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import GithubProvider from "next-auth/providers/github"
-import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
+import GithubProvider from "next-auth/providers/github"
 import { db } from "@/lib/prismaDB"
-
  
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(db),
   providers: [
-    
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+    GithubProvider({
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string
     }),
     CredentialsProvider({
       name: 'credentials',
       credentials: {
         email: { label: 'email', type: 'text' },
-        password: { label: 'password', type: 'password' }
+        password: { label: 'password', type: 'password'}
+        
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Invalid credentials');
         }
 
+
         const user = await db.user.findUnique({
           where: {
-            email: credentials.email,
-            
-          },
-         
+            email: credentials.email
+          }
         });
-       
 
         if (!user || !user?.hashedPassword) {
           throw new Error('Invalid credentials');
         }
-
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.hashedPassword
@@ -48,7 +43,6 @@ export const authOptions: AuthOptions = {
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials');
         }
-
         return user;
       }
     })
@@ -61,38 +55,28 @@ export const authOptions: AuthOptions = {
       console.log('Session Callback', { session, token })
       return {
         ...session,
-        
-        
         user: {
           ...session.user,
           id: token.id,
           isAdmin: token.isAdmin,
           isInstructor: token.isInstructor,
-           
           randomKey: token.randomKey
         }
       }
     },
-    jwt: ({ token, user,session }) => {
-       if (user) {
-        
+    jwt: ({ token, user }) => {
+      console.log('JWT Callback', { token, user })
+      if (user) {
         const u = user as unknown as any
-
-       
         return {
           ...token,
           id: u.id,
-          isAdmin:u.isAdmin,
-          isInstructor:u.isInstructor,
-          
-
+          isInstructor: u.isInstructor,
+          isAdmin: u.isAdmin,
           randomKey: u.randomKey
         }
       }
       return token
-      if(!user){
-        throw new Error("failed to login wrong credentials")
-      }
     }
   },
   debug: process.env.NODE_ENV === 'development',
@@ -102,6 +86,5 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 }
 
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
+const handler = NextAuth(authOptions)
+export {handler as GET, handler as POST}
