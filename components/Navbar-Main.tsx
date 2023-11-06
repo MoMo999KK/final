@@ -76,7 +76,8 @@ export const NavbarMain  = ({user}:Props) => {
                   <Link href={"/adminstrator"} >DashbOard</Link>
                 
                   )}
-                  <div className="" onClick={()=>signOut()}> 
+                 
+                  <div className="" onClick={()=>signOut({ callbackUrl: '/' })}> 
                   
                   <hr />
                   <LogOut  className='mt-1'/>

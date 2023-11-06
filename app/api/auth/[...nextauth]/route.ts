@@ -47,9 +47,7 @@ export const authOptions: AuthOptions = {
       }
     })
   ],
-  pages: {
-    signIn: '/',
-  },
+ 
   callbacks: {
     session: ({ session, token }) => {
       console.log('Session Callback', { session, token })
@@ -84,6 +82,7 @@ export const authOptions: AuthOptions = {
     strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  
 }
 
 const handler = NextAuth(authOptions)
