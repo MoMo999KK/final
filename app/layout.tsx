@@ -27,9 +27,10 @@ export default async function RootLayout({
 }) {
   const user=await getCurrentUser()
  
+  
   return (
     <html lang="en">
-      <body className="  ">
+      <body className="">
         <AuthProvider>
         <LoginModal/>
         <RegisterModal/>
