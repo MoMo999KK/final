@@ -15,7 +15,7 @@ const Footer = ({admin}:Props) => {
   }
 
   return (
-    <div className=' bg-slate-200 mt-[450px]   h-[200px] w-full shadow-sm mx-auto rounded-md'>Footer</div>
+    <div className=' bg-slate-200 mt-[460px]   h-[200px] w-full shadow-sm mx-auto rounded-md'>Footer</div>
   )
 }
 

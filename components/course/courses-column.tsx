@@ -71,7 +71,7 @@ export const Coursecolumns: ColumnDef<UserCourse>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View course</DropdownMenuItem>
-           <Link href={`http://localhost:3000/adminstrator/courses/${course.id}`}><DropdownMenuItem>Edit/publish</DropdownMenuItem></Link> 
+           <Link href={`/adminstrator/courses/${course.id}`}><DropdownMenuItem>Edit/publish</DropdownMenuItem></Link> 
           </DropdownMenuContent>
         </DropdownMenu>
       )
