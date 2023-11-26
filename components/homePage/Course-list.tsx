@@ -67,7 +67,19 @@ export const CoursList = ({initialData,user}:Props) => {
 
   return (
     <div className="max-w-[1100px] mx-auto  grid grid-cols-2 md:grid-cols-3">
- l
+ {initialData?.map((course)=>(
+  <div className="h-[350px] w-[300px] shadow-lg  " key={course.id}>
+    <Image src={course?.image! || "/users/sample.jpg"} alt={course.name!} height={200} width={200} className="h-3/4 w-full object-cover"/>
+   <div className=" flex justify-between gap-4 p-1 items-center flex-wrap overflow-hidden">
+   <h1>{course.name}</h1>
+   <p>price:{course.isFree? "is free" : course.price}</p>
+   
+   <Button className="mb-2">{course.isFree?"join" : "buy now"}</Button>
+    <Link className="" href={`/courses/${course.id}`}>Ssee details</Link> 
+   </div>
+  </div>
+ ))}
+
         
 
  

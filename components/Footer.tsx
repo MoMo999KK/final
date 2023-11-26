@@ -1,8 +1,21 @@
-import React from 'react'
+"use client"
 
-const Footer = () => {
+import { User } from "@prisma/client"
+import { redirect, usePathname } from "next/navigation"
+
+interface Props{
+  admin:User | null
+}
+
+const Footer = ({admin}:Props) => {
+  const pathname=usePathname()
+  if(pathname.startsWith("/adminstrator") && !admin?.isAdmin){
+    redirect("/")
+
+  }
+
   return (
-    <div className=' bg-slate-200 mt-[100px]   h-[200px] w-full shadow-sm mx-auto rounded-md'>Footer</div>
+    <div className=' bg-slate-200 mt-[450px]   h-[200px] w-full shadow-sm mx-auto rounded-md'>Footer</div>
   )
 }
 
