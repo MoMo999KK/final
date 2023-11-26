@@ -9,6 +9,7 @@ import Footer from '@/components/Footer'
 import { NavbarMain } from '@/components/Navbar-Main'
 import { getCurrentUser } from './actions/get-current-user'
  import { db } from '@/lib/prismaDB'
+import { findCurrenAdmin } from './actions/findCurrentAdmin'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -28,6 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const user=await getCurrentUser()
+  const admin=await findCurrenAdmin()
  
   
   return (
@@ -45,7 +47,8 @@ export default async function RootLayout({
         {children}
         <div className=" bottom-0 w-full">
         
-        <Footer />
+        <Footer admin={admin} />
+        
         </div>
         </div>
         <Toaster/>
