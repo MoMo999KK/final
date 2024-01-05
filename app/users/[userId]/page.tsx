@@ -1,7 +1,6 @@
  
 
-import { findCurrenAdmin } from '@/app/actions/findCurrentAdmin'
-import { getCurrentUserProfile } from '@/app/actions/get-curenUserProfile'
+ import { getCurrentUserProfile } from '@/app/actions/get-curenUserProfile'
 import { getCurrentUser } from '@/app/actions/get-current-user'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
  import { ProfileTabs } from '@/components/profile-user/tabs'
@@ -35,6 +34,45 @@ import {
 import { Purchuses, User } from "@prisma/client"
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react"
 import Link from "next/link"
+import { Metadata } from 'next'
+
+
+
+
+export async function generateStaticParams() {
+  const users=await db.user.findMany({
+     
+  })
+
+  return users.map(({ id }) => id);
+
+   
+ 
+}
+
+export async function generateMetadata({
+  params
+}: {
+  params: { userId: string }
+}): Promise<Metadata> {
+  const response = await db.user.findUnique({
+    where:{
+      id:params.userId
+    }
+  })
+ 
+  return {
+    title: response?.name,
+    description:response?.email,
+    // openGraph: {
+    //   images: [
+    //     {
+    //       url: post.imageUrl
+    //     }
+    //   ]
+    // }
+  };
+}
  
  
 

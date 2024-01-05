@@ -1,3 +1,4 @@
+import { getsingleCourse } from '@/actions'
 import { getCurrentUser } from '@/app/actions/get-current-user'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
   import { HandelViewIncrement } from '@/components/course/handel-viewIncrement'
@@ -10,10 +11,54 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { db } from '@/lib/prismaDB'
 import { ArrowBigLeft } from 'lucide-react'
+import { Metadata } from 'next'
 import { getServerSession } from 'next-auth'
+import { cache } from "react";
  
 import Link from 'next/link'
+
+
+
+export async function generateStaticParams() {
+  const courses=await db.userCourse.findMany({
+    where:{
+      isPublished:true
+    }
+  })
+
+  return courses.map(({ id }) => id);
+
    
+ 
+}
+   
+
+
+
+export async function generateMetadata({
+  params
+}: {
+  params: { courseId: string }
+}): Promise<Metadata> {
+  const response = await getsingleCourse(params.courseId)
+
+
+  return {
+    title: response?.name,
+    description:response?.description,
+
+    openGraph: {
+       images: [
+         {
+        url: response?.image!
+        }
+       ]
+      }
+   
+  };
+}
+
+
 
 const CourseDetails = async({
   params
@@ -35,6 +80,7 @@ const CourseDetails = async({
     },
     
   })
+  
 
  
    
@@ -42,23 +88,7 @@ const CourseDetails = async({
   try {
     
   
-   const singleCourse=await db.userCourse.findUnique({
-       where:{
-          id:params.courseId
-      },
-       include:{
-           user:true,
-           userCoursePart:true,
-           comments:{
-            include:{
-              user:true,
-              reply:true
-            },
-           
-           }
-
-       }
-  })
+   const singleCourse=await getsingleCourse(params.courseId)
 const commentsCourse=await db.comments.findMany({
   where:{
     userCourseId:params.courseId,

@@ -12,6 +12,9 @@ import useLoginModalNow from "@/app/stores/useLogInModal"
 import { ArrowBigRight, MoveRight } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { cursorTo } from "readline"
+import { useCallback, useEffect } from "react"
+import ButtonCheckoutComponent from "../ButtonCheckoutComponent"
+import { string } from "zod"
  
 
 interface Props{
@@ -61,6 +64,9 @@ export const CoursList = ({initialData,user}:Props) => {
         }
       }
   }
+  
+  
+ 
  
 
   
@@ -73,8 +79,24 @@ export const CoursList = ({initialData,user}:Props) => {
    <div className=" flex justify-between gap-4 p-1 items-center flex-wrap overflow-hidden">
    <h1>{course.name}</h1>
    <p>price:{course.isFree? "is free" : course.price}</p>
+
+   {course.isFree?   (
+    <>
+     {
+      user?.boughtCourses.includes(course.id) ? (
+        <div className="">    <Link href={`/courses/${course.id}`}> <Button className="mb-2">{"continue" }</Button></Link>
+        </div>
+      ):(
+        <div className="">     <Button className="mb-2" onClick={()=>freeJoineHandler(course.id)}>{"join" }</Button>
+        </div>
+      )
+     }
+    </>
    
-   <Button className="mb-2">{course.isFree?"join" : "buy now"}</Button>
+   ):(
+    <ButtonCheckoutComponent price={course.price as number} email={session?.user?.email as string} courseId={course.id} teacherId={course.userId!}/>
+   )}
+   
     <Link className="" href={`/courses/${course.id}`}>Ssee details</Link> 
    </div>
   </div>

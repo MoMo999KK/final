@@ -2,9 +2,7 @@ import { findCurrenTeacher } from '@/app/actions/findCurrenTeacher'
 import { getSingleCourse } from '@/app/actions/get-singleCOurse'
 import { getCategories } from '@/app/actions/getAllCategories'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
-import { CreateCategory } from '@/components/admincomponenst/create-category'
-import { IsFreeForm } from '@/components/admincomponenst/isFreeForm'
-import { ChapterNameList } from '@/components/teacher/ChapterNameList'
+ import { ChapterNameList } from '@/components/teacher/ChapterNameList'
 import EditNameForm from '@/components/teacher/EditForm'
 import { EditDescription } from '@/components/teacher/EditTextArea'
 import { CreateChapterName } from '@/components/teacher/create-chapter-name'
@@ -13,9 +11,33 @@ import { ChoseCategoryForm } from '@/components/teacher/edit-ctaegory-form'
  import { EditPriceForm } from '@/components/teacher/edit-price'
 import EditVideoForm from '@/components/teacher/edit-video-intro'
 import { Separator } from '@/components/ui/separator'
-import { Category, UserCourse } from '@prisma/client'
-import { getServerSession } from 'next-auth'
+import { db } from '@/lib/prismaDB'
+import { Metadata } from 'next'
+ import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation'
+
+
+export async function generateStaticParams() {
+  const response = await db.userCourse.findMany({})
+ 
+  return response.map(({ id }) => id);
+}
+export async function generateMetadata({params}:{params:{courseId:string}}): Promise<Metadata> {
+  const response =   await getSingleCourse(params.courseId)
+ 
+  return {
+    title: response?.name,
+    description:response?.description,
+    // openGraph: {
+    //   images: [
+    //     {
+    //       url: post.imageUrl
+    //     }
+    //   ]
+    // }
+  };
+}
+
  
  
 const SingleCourseDetails = async({params}:{params:{courseId:string}}) => {

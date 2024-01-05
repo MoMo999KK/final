@@ -110,12 +110,11 @@ export async function PUT(req:Request,{ params }: { params: { userId: string }})
             }
             
         })
-        const  result = parseInt("0")
-        const puchuse=await db.purchuses.create({
+         const puchuse=await db.purchuses.create({
             data:{
                 userId:params.userId,
                 userCourseId:course.id,
-                price:result.toExponential(),
+                price:10,
                 isFree:true
 
             }

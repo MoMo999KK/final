@@ -241,13 +241,17 @@ model ImageSlider{
 }
 model Purchuses{
       id              String @id @default(auto()) @map("_id") @db.ObjectId
-      price   String?
+      price   Int?
       isFree   Boolean @default(false)
        userId         String? @db.ObjectId
          user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
               userCourseId      String? @db.ObjectId
          userCourse UserCourse? @relation(fields: [userCourseId], references: [id], onDelete: Cascade)
          teacherId    String?
+         intent_id String? 
+         email   String?
+         status    String? @default("NotPaid")
+         
 
 
     

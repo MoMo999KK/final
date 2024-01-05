@@ -7,10 +7,42 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { db } from '@/lib/prismaDB'
 import { ArrowBigLeft, MoveLeft } from 'lucide-react'
+import { Metadata } from 'next'
 import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import React from 'react'
+
+
+export async function generateStaticParams() {
+  const response = await db.user.findMany({})
+ 
+  return response.map(({ id }) => id);
+}
+
+
+export async function generateMetadata ({params}:{params:{userId:string}}) : Promise<Metadata> {
+  const response = await db.user.findUnique({
+    where:{
+      id:params.userId,
+      isInstructor:true
+    }
+  })
+ 
+  return {
+    title: response?.name,
+    description:response?.email,
+    // openGraph: {
+    //   images: [
+    //     {
+    //       url: post.imageUrl
+    //     }
+    //   ]
+    // }
+  };
+}
+
+
 
 const TeacherProfile =async ({params}:{params:{userId:string}}) => {
   const session=await getServerSession(authOptions)

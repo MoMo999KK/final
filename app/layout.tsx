@@ -15,9 +15,13 @@ import { findCurrenAdmin } from './actions/findCurrentAdmin'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'show house',
-  description: 'buy shoes with 20 procent discount',
-  keywords:"shoes ,modern, shoes 20% ,off discount modern shoes ",
+  title: {
+    default: "Next  Code ",
+    template: "%s - Next Code ",
+  },
+  description: "Buy Online & modern courses ",
+  
+  
   
 
   

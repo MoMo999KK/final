@@ -28,36 +28,31 @@ export async function POST(
 
 
  
- 
+ const boughted=await db.user.update({
+  where:{
+    email:session?.user?.email!
+  },
+  data:{
+    boughtCourses:{
+      push:params.courseId
+
+    }
+  }
+ })
     
    
-    const addedCourse = await db.user.update({
-      where: {
-        email:session?.user?.email!,
-        
-      },
-      data:{
-        boughtCourses:{
-           push:params.courseId
-        }
-       }
-      
-    
-    });
-    const  result = parseInt("0")
-    const purchuse=await db.purchuses.create({
+ 
+     const purchuse=await db.purchuses.create({
      data:{
-    userId:addedCourse.id,
-    userCourseId:params.courseId,
+     userCourseId:params.courseId,
     isFree:true,
-    price:result.toExponential()
-
+ 
      }
     })
  
   
 
-    return NextResponse.json({addedCourse,purchuse},{status:200});
+    return NextResponse.json({purchuse},{status:200});
   } catch (error) {
     
     return new NextResponse("Internal Error", { status: 500 });

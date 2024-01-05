@@ -3,7 +3,7 @@ import React from 'react'
 function About() {
   return (
     <div>
-        about poa
+     this is an about page
 
     </div>
   )
